@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transporte JavaScript | Gestión de rutas</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="contenedor">
+    <header class="encabezado">
+      <div>
+        <p class="etiqueta">Sistema de gestión · JavaScript</p>
+        <h1>Rutas de transporte</h1>
+        <p class="subtitulo">Planifica recorridos, asigna vehículos y consulta la red.</p>
+      </div>
+      <span class="puerto">Servidor :8083</span>
+    </header>
+
+    <section class="panel">
+      <h2>Solicitar una ruta</h2>
+      <form id="formulario-ruta">
+        <label>Cliente<input name="cliente" required maxlength="80" placeholder="Nombre del cliente"></label>
+        <label>Origen<select name="origenId" id="origen" required></select></label>
+        <label>Destino<select name="destinoId" id="destino" required></select></label>
+        <label>Criterio
+          <select name="criterio" required>
+            <option value="distancia">Menor distancia</option>
+            <option value="tiempo">Menor tiempo</option>
+            <option value="costo">Menor costo</option>
+          </select>
+        </label>
+        <label>Tráfico para el cálculo
+          <select name="nivelTrafico">
+            <option value="">Usar tráfico de la red</option>
+            <option value="bajo">bajo</option>
+            <option value="medio">medio</option>
+            <option value="alto">alto</option>
+          </select>
+        </label>
+        <label>Pasajeros<input name="pasajeros" type="number" min="1" value="1" required></label>
+        <button type="submit">Calcular y asignar</button>
+      </form>
+      <p id="aviso" class="aviso" role="status"></p>
+    </section>
+
+    <section class="panel">
+      <div class="titulo-seccion">
+        <div><h2>Red de transporte</h2><p>Conexiones dirigidas; cada arista muestra su tráfico base.</p></div>
+      </div>
+      <div id="grafo" class="lista-conexiones"></div>
+    </section>
+
+    <section class="panel">
+      <div class="titulo-seccion">
+        <div><h2>Solicitudes</h2><p>El vehículo asignado vuelve a disponible al finalizar el viaje.</p></div>
+        <button id="procesar-lote" class="boton-secundario" type="button">Probar lote de ejemplo</button>
+      </div>
+      <div class="tabla-contenedor">
+        <table>
+          <thead><tr><th>Cliente</th><th>Ruta</th><th>Criterio</th><th>Distancia</th><th>Tiempo</th><th>Costo</th><th>Vehículo</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="tabla-solicitudes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Vehículos</h2>
+      <div id="lista-vehiculos" class="vehiculos"></div>
+    </section>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>

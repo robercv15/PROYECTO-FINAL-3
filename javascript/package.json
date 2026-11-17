@@ -1,0 +1,14 @@
+{
+  "name": "proyecto-polycode-transporte-javascript",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Servidor Node.js nativo para gestión de rutas de transporte",
+  "scripts": {
+    "start": "node src/servidor.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
