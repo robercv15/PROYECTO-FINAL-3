@@ -1,0 +1,177 @@
+{
+  "nota": "Las solicitudes incluyen pasajeros para validar capacidad. Cada caso inicia con la red y el catálogo de vehículos en su estado inicial, salvo que su prueba indique lo contrario.",
+  "casos": [
+    {
+      "id": "caso-1-ruta-mas-corta",
+      "descripcion": "Dijkstra por distancia en el grafo básico dirigido A->B->C, con la alternativa directa A->C.",
+      "redPrueba": {
+        "ubicaciones": [
+          {
+            "id": "A",
+            "nombre": "Origen de prueba",
+            "tipo": "origen"
+          },
+          {
+            "id": "B",
+            "nombre": "Punto intermedio",
+            "tipo": "ambos"
+          },
+          {
+            "id": "C",
+            "nombre": "Destino de prueba",
+            "tipo": "destino"
+          }
+        ],
+        "conexiones": [
+          {
+            "origenId": "A",
+            "destinoId": "B",
+            "distanciaKm": 4,
+            "tiempoBaseMin": 5,
+            "costoBase": 2,
+            "nivelTrafico": "bajo"
+          },
+          {
+            "origenId": "B",
+            "destinoId": "C",
+            "distanciaKm": 4,
+            "tiempoBaseMin": 5,
+            "costoBase": 2,
+            "nivelTrafico": "bajo"
+          },
+          {
+            "origenId": "A",
+            "destinoId": "C",
+            "distanciaKm": 10,
+            "tiempoBaseMin": 20,
+            "costoBase": 9,
+            "nivelTrafico": "alto"
+          }
+        ],
+        "multiplicadoresTrafico": {
+          "bajo": 1.0,
+          "medio": 1.2,
+          "alto": 1.5
+        }
+      },
+      "solicitud": {
+        "id": "S-001",
+        "cliente": "Cliente 1",
+        "origenId": "A",
+        "destinoId": "C",
+        "criterio": "distancia",
+        "fecha": "2026-01-15T10:00:00Z",
+        "estado": "pendiente",
+        "pasajeros": 1
+      },
+      "resultadoEsperado": {
+        "rutaIds": [
+          "A",
+          "B",
+          "C"
+        ],
+        "distanciaTotalKm": 8,
+        "tiempoTotalMin": 10,
+        "costoTotal": 4
+      }
+    },
+    {
+      "id": "caso-2-ruta-mas-rapida-evitando-trafico",
+      "descripcion": "Dijkstra por tiempo efectivo; el camino rápido evita la conexión directa con tráfico alto.",
+      "redId": "red_transporte",
+      "solicitud": {
+        "id": "S-002",
+        "cliente": "Cliente 2",
+        "origenId": "A",
+        "destinoId": "C",
+        "criterio": "tiempo",
+        "fecha": "2026-01-15T10:05:00Z",
+        "estado": "pendiente",
+        "pasajeros": 1
+      },
+      "resultadoEsperado": {
+        "rutaIds": [
+          "A",
+          "D",
+          "C"
+        ],
+        "distanciaTotalKm": 6,
+        "tiempoTotalMin": 8,
+        "costoTotal": 6
+      }
+    },
+    {
+      "id": "caso-3-ruta-mas-barata",
+      "descripcion": "Dijkstra por costo base.",
+      "redId": "red_transporte",
+      "solicitud": {
+        "id": "S-003",
+        "cliente": "Cliente 3",
+        "origenId": "A",
+        "destinoId": "C",
+        "criterio": "costo",
+        "fecha": "2026-01-15T10:10:00Z",
+        "estado": "pendiente",
+        "pasajeros": 1
+      },
+      "resultadoEsperado": {
+        "rutaIds": [
+          "A",
+          "B",
+          "C"
+        ],
+        "distanciaTotalKm": 8,
+        "tiempoTotalMin": 10,
+        "costoTotal": 4
+      }
+    },
+    {
+      "id": "caso-4-asignacion-de-vehiculo",
+      "descripcion": "La solicitud para 2 pasajeros elige el primer vehículo disponible con capacidad suficiente; el vehículo cambia a ocupado.",
+      "redId": "red_transporte",
+      "vehiculosId": "vehiculos",
+      "solicitud": {
+        "id": "S-004",
+        "cliente": "Cliente 4",
+        "origenId": "A",
+        "destinoId": "C",
+        "criterio": "distancia",
+        "fecha": "2026-01-15T10:15:00Z",
+        "estado": "pendiente",
+        "pasajeros": 2
+      },
+      "resultadoEsperado": {
+        "rutaIds": [
+          "A",
+          "D",
+          "C"
+        ],
+        "distanciaTotalKm": 6,
+        "vehiculoAsignadoId": "V-AUTO-01",
+        "vehiculoEstadoDespuesDeAsignar": "ocupado"
+      }
+    },
+    {
+      "id": "caso-5-sin-ruta-posible",
+      "descripcion": "El destino E está aislado; el sistema devuelve un error controlado y no crea una ruta.",
+      "redId": "red_transporte",
+      "solicitud": {
+        "id": "S-005",
+        "cliente": "Cliente 5",
+        "origenId": "A",
+        "destinoId": "E",
+        "criterio": "distancia",
+        "fecha": "2026-01-15T10:20:00Z",
+        "estado": "pendiente",
+        "pasajeros": 1
+      },
+      "resultadoEsperado": {
+        "error": {
+          "codigo": "RUTA_NO_DISPONIBLE",
+          "mensaje": "No existe una ruta entre el origen y el destino."
+        },
+        "rutaIds": []
+      }
+    }
+  ]
+}

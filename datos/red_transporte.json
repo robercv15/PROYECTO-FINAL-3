@@ -1,0 +1,76 @@
+{
+  "ubicaciones": [
+    {
+      "id": "A",
+      "nombre": "Terminal Norte",
+      "tipo": "origen"
+    },
+    {
+      "id": "B",
+      "nombre": "Centro",
+      "tipo": "ambos"
+    },
+    {
+      "id": "C",
+      "nombre": "Terminal Sur",
+      "tipo": "destino"
+    },
+    {
+      "id": "D",
+      "nombre": "Distrito Este",
+      "tipo": "ambos"
+    },
+    {
+      "id": "E",
+      "nombre": "Zona Aislada",
+      "tipo": "destino"
+    }
+  ],
+  "conexiones": [
+    {
+      "origenId": "A",
+      "destinoId": "B",
+      "distanciaKm": 4,
+      "tiempoBaseMin": 5,
+      "costoBase": 2,
+      "nivelTrafico": "bajo"
+    },
+    {
+      "origenId": "B",
+      "destinoId": "C",
+      "distanciaKm": 4,
+      "tiempoBaseMin": 5,
+      "costoBase": 2,
+      "nivelTrafico": "bajo"
+    },
+    {
+      "origenId": "A",
+      "destinoId": "C",
+      "distanciaKm": 10,
+      "tiempoBaseMin": 20,
+      "costoBase": 9,
+      "nivelTrafico": "alto"
+    },
+    {
+      "origenId": "A",
+      "destinoId": "D",
+      "distanciaKm": 3,
+      "tiempoBaseMin": 4,
+      "costoBase": 3,
+      "nivelTrafico": "bajo"
+    },
+    {
+      "origenId": "D",
+      "destinoId": "C",
+      "distanciaKm": 3,
+      "tiempoBaseMin": 4,
+      "costoBase": 3,
+      "nivelTrafico": "bajo"
+    }
+  ],
+  "multiplicadoresTrafico": {
+    "bajo": 1.0,
+    "medio": 1.2,
+    "alto": 1.5
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "vehiculos": [
+    {
+      "id": "V-MOTO-01",
+      "placa": "MOT-101",
+      "tipo": "moto",
+      "capacidad": 1,
+      "estado": "disponible"
+    },
+    {
+      "id": "V-AUTO-01",
+      "placa": "AUT-202",
+      "tipo": "auto",
+      "capacidad": 4,
+      "estado": "disponible"
+    },
+    {
+      "id": "V-CAMION-01",
+      "placa": "CAM-303",
+      "tipo": "camion",
+      "capacidad": 12,
+      "estado": "disponible"
+    }
+  ]
+}
